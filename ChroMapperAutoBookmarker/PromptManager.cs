@@ -96,7 +96,7 @@ namespace ChroMapperAutoBookmarker
                 case GENERATE_STATE:
                     BookmarkManager bookmarkManager = Resources.FindObjectsOfTypeAll<BookmarkManager>().First();
                     AudioTimeSyncController atsc = Resources.FindObjectsOfTypeAll<AudioTimeSyncController>().First();
-                    float lastBeat = atsc.GetBeatFromSeconds(atsc.songAudioSource.clip.length);
+                    float lastBeat = atsc.GetBeatFromSeconds(atsc.SongAudioSource.clip.length);
 
                     float currentBeat = StartBeat;
                     int count = 1;
@@ -105,7 +105,7 @@ namespace ChroMapperAutoBookmarker
                     {
                         BeatmapBookmark newBookmark = new BeatmapBookmark(currentBeat, string.IsNullOrWhiteSpace(Name) ? $"{count}" : $"{Name} {count}");
                         BookmarkContainer container = MonoBehaviour.Instantiate(bookmarkManager.GetField<GameObject>("bookmarkContainerPrefab"), bookmarkManager.transform).GetComponent<BookmarkContainer>();
-                        container.name = newBookmark._name;
+                        container.name = newBookmark.Name;
                         container.Init(bookmarkManager, newBookmark);
                         container.RefreshPosition(bookmarkManager.GetField<RectTransform>("timelineCanvas").sizeDelta.x + bookmarkManager.GetField<float>("CANVAS_WIDTH_OFFSET"));
                         bookmarkManager.GetField<List<BookmarkContainer>>("bookmarkContainers").Add(container);
@@ -114,7 +114,7 @@ namespace ChroMapperAutoBookmarker
                             amountLeft--;
                         count++;
                     }
-                    BeatSaberSongContainer.Instance.map._bookmarks = bookmarkManager.GetField<List<BookmarkContainer>>("bookmarkContainers").Select(x => x.data).ToList();
+                    BeatSaberSongContainer.Instance.Map.Bookmarks = bookmarkManager.GetField<List<BookmarkContainer>>("bookmarkContainers").Select(x => x.Data).ToList();
                     Utils.SetActionMapsEnabled(true);
                     break;
             }
