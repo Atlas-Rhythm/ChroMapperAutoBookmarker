@@ -107,7 +107,7 @@ namespace ChroMapperAutoBookmarker
                         BookmarkContainer container = MonoBehaviour.Instantiate(bookmarkManager.GetField<GameObject>("bookmarkContainerPrefab"), bookmarkManager.transform).GetComponent<BookmarkContainer>();
                         container.name = newBookmark.Name;
                         container.Init(bookmarkManager, newBookmark);
-                        container.RefreshPosition(bookmarkManager.GetField<RectTransform>("timelineCanvas").sizeDelta.x + bookmarkManager.GetField<float>("CANVAS_WIDTH_OFFSET"));
+                        container.RefreshPosition(bookmarkManager.GetField<RectTransform>("timelineCanvas").sizeDelta.x + bookmarkManager.GetField<float>("canvasWidthOffset"));
                         bookmarkManager.GetField<List<BookmarkContainer>>("bookmarkContainers").Add(container);
                         currentBeat += Interval;
                         if (amountLeft > 0)
